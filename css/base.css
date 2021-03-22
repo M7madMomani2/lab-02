@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import'layout.css';
+*{
+  font-family: 'Indie Flower', cursive;
+}
+
+h1{
+  font-size: 60px;
+  font-family: 'Indie Flower', cursive;
+  color: rgb(66, 0, 0);
+  text-align: center;
+  margin: 20px;
+}
+select{
+  text-align: center;
+  margin: 6vh 43%;
+  font-size: 30px;
+}
