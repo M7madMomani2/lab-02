@@ -1,32 +1,50 @@
 'use struct';
 
+let hKeyword = [];
 const page1Json =[];
 const page2Json =[];
 const pageAllJson =[];
 
-let tempId='#horns-template';
-
-
 function Horns(hornsTyp){
-  for (let horn in hornsTyp ){
-    this[horn] = hornsTyp[horn];
-  }
+  this.image_url=hornsTyp.image_url;
+  this.title=hornsTyp.title;
+  this.description=hornsTyp.description;
+  this.keyword=hornsTyp.keyword;
+  this.horns=hornsTyp.horns;
+  this.runder();
 }
-Horns.prototype.toHtml=function(){
+Horns.prototype.runder = function(){
 
-  let template = $(tempId).html();
-  console.log(this);
+  const cardEl =$('<div></div>').attr('class', 'card');
+  const titleEl =$('<h2></h2>').text(this.title);
+  const imageEl =$('<img></img>').attr('src',this.image_url);
+  const descriptionEl =$('<p></p>').text(this.description);
+  const hornsEl =$('<h3></h3>').text(`horns : ${this.horns}`);
+
+  if (!(hKeyword.includes(this.keyword))){
+
+    const selectOp =$('<option></option>').text(this.keyword);
+    selectOp.attr('value',`${this.keyword}`);
+    $('#sel').append(selectOp);
+    hKeyword.push(this.keyword);
+  }
+
+
+
+  cardEl.append(titleEl);
+  cardEl.append(imageEl);
+  cardEl.append(descriptionEl);
+  cardEl.append(hornsEl);
+  $('.container').append(cardEl);
+
+};
+
+
+Horns.prototype.toHtml=function(){
+  let template = $('#horns-template').html();
   let html =Mustache.runder(template,this);
   return html ;
 };
-Horns.prototype.runder = function(){
-  console.log(this);
-  $('.container').append(this.toHtml());
-};
-
-
-
-
 
 $(document).ready(function(){
 
@@ -35,27 +53,30 @@ $(document).ready(function(){
     dataType: 'json'
   };
 
-  $.ajax('./data/page-1.json',ajaxSettings)
-    .then(data =>{
-      data.forEach(element => {
-        page1Json.push(element);
-        pageAllJson.push(element);
-        new Horns(element);
 
+
+  {
+    $.ajax('./data/page-1.json',ajaxSettings)
+      .then(data =>{
+        data.forEach(element => {
+          page1Json.push(element);
+          pageAllJson.push(element);
+          new Horns(element);
+
+        });
       });
-    });
 
 
-  $.ajax('./data/page-2.json',ajaxSettings)
-    .then(data =>{
-      data.forEach(element => {
-        page2Json.push(element);
-        pageAllJson.push(element);
+    $.ajax('./data/page-2.json',ajaxSettings)
+      .then(data =>{
+        data.forEach(element => {
+          page2Json.push(element);
+          pageAllJson.push(element);
 
+        });
       });
-    });
 
-
+  }
 
 
 
@@ -187,11 +208,3 @@ $(document).ready(function(){
 //     }
 //   });
 // })
-
-
-
-
-
-
-
-
