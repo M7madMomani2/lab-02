@@ -42,7 +42,7 @@ $(document).ready(function(){
       data.forEach(element => {
         page1Json.push(element);
         pageAllJson.push(element);
-        new Horns(element);
+        // new Horns(element);
 
         if (!(hKeyword.includes(element.keyword))){
           hKeyword.push(element.keyword);
@@ -53,6 +53,20 @@ $(document).ready(function(){
         }
 
       });
+
+ 
+      page1Json.sort((a,b)=>{
+        if (a.title >b.title){
+          return 1;
+        }
+        if (b.title >a.title){
+          return -1;
+        }
+      })
+      page1Json.forEach(element => {
+        new Horns(element);
+      });
+
     });
 
 
@@ -68,6 +82,14 @@ $(document).ready(function(){
           }
         }
       });
+      pageAllJson.sort((a,b)=>{
+        if (a.title >b.title){
+          return 1;
+        }
+        if (b.title >a.title){
+          return -1;
+        }
+      })
     });
 
   $('#sel').on('click' , function(){
