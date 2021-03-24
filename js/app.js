@@ -54,7 +54,7 @@ $(document).ready(function(){
 
       });
 
- 
+
       page1Json.sort((a,b)=>{
         if (a.title >b.title){
           return 1;
@@ -92,6 +92,7 @@ $(document).ready(function(){
       })
     });
 
+
   $('#sel').on('click' , function(){
     const hValue = $('#sel').val();
     let T = $('#horns-template').clone();
@@ -114,244 +115,115 @@ $(document).ready(function(){
     const pValue = $('#pageSel').val();
 
     if (pValue === 'Page1'){
-
-
-      $('#pageSel').on('click',function(){
-        let result=$('#pageSel').val();
-        if (result === 'byName'){
-          page1Json.sort((a,b)=>{
-            if (a.title >b.title){
-              return 1;
-            }
-            if (b.title >a.title){
-              return -1;
-            }
-          })
-        }
-
-        else if (result === 'byHorns'){
-          page1Json.sort((a,b)=>{
-            if (a.horns >b.horns){
-              return 1;
-            }
-            if (b.horns >a.horns){
-              return -1;
-            }
-          });
-
-        }
-
-      });
-
-
-
-
-
-
-      $('#sel').empty();
-      let T = $('#horns-template').clone();
-      $('.container').empty();
-      $('.container').append(T);
-      let selectOp1 =$('<option></option>').text('Filter by Keyword');
-      selectOp1.attr('value',`default`);
-      $('#sel').append(selectOp1);
-      hKeyword.forEach(element => {
-        const selectOp =$('<option></option>').text(element);
-        selectOp.attr('value',`${element}`);
-        $('#sel').append(selectOp);
-      });
-
-      page1Json.forEach(element => {
-        new Horns(element);
-      });
-
-      $('#sel').on('click' , function(){
-        const hValue = $('#sel').val();
-        let T = $('#horns-template').clone();
-        $('.container').empty();
-        $('.container').append(T);
-        page1Json.forEach(element => {
-          if (hValue ==='default'){
-            new Horns(element);
-          }
-
-          else if (element.keyword === hValue){
-            new Horns(element);
-          }
-        });
-      })
-
-
-
+      go(page1Json, hKeyword);
     }
     else if (pValue === 'Page2'){
-
-
-      $('#pageSel').on('click',function(){
-        let result=$('#pageSel').val();
-        if (result === 'byName'){
-          page2Json.sort((a,b)=>{
-            if (a.title >b.title){
-              return 1;
-            }
-            if (b.title >a.title){
-              return -1;
-            }
-          })
-        }
-
-        else if (result === 'byHorns'){
-          page2Json.sort((a,b)=>{
-            if (a.horns >b.horns){
-              return 1;
-            }
-            if (b.horns >a.horns){
-              return -1;
-            }
-          });
-
-        }
-
-      });
-
-
-
-
-
-
-      $('#sel').empty();
-      let T = $('#horns-template').clone();
-      $('.container').empty();
-      $('.container').append(T);
-      let selectOp1 =$('<option></option>').text('Filter by Keyword');
-      selectOp1.attr('value',`default`);
-      $('#sel').append(selectOp1);
-      hKeyword2.forEach(element => {
-        const selectOp =$('<option></option>').text(element);
-        selectOp.attr('value',`${element}`);
-        $('#sel').append(selectOp);
-      });
-
-
-      page2Json.forEach(element => {
-        new Horns(element);
-      });
-
-      $('#sel').on('click' , function(){
-        const hValue = $('#sel').val();
-        let T = $('#horns-template').clone();
-        $('.container').empty();
-        $('.container').append(T);
-        page2Json.forEach(element => {
-          if (hValue ==='default'){
-            new Horns(element);
-          }
-
-          else if (element.keyword === hValue){
-            new Horns(element);
-          }
-        });
-      })
+      go(page2Json, hKeyword2);
     }
     else {
-
-      let result=$('#pageSel').val();
-      if (result === 'byName'){
-        pageAllJson.sort((a,b)=>{
-          if (a.title >b.title){
-            return 1;
-          }
-          if (b.title >a.title){
-            return -1;
-          }
-        })
-      }
-
-      else if (result === 'byHorns'){
-        pageAllJson.sort((a,b)=>{
-          if (a.horns >b.horns){
-            return 1;
-          }
-          if (b.horns >a.horns){
-            return -1;
-          }
-        });
-
-      }
-
-
-      $('#sel').empty();
-      let T = $('#horns-template').clone();
-      $('.container').empty();
-      $('.container').append(T);
-      let selectOp1 =$('<option></option>').text('Filter by Keyword');
-      selectOp1.attr('value',`default`);
-      $('#sel').append(selectOp1);
-      hKeywordAll.forEach(element => {
-        const selectOp =$('<option></option>').text(element);
-        selectOp.attr('value',`${element}`);
-        $('#sel').append(selectOp);
-      });
-
-
-      pageAllJson.forEach(element => {
-        new Horns(element);
-      });
-
-      $('#sel').on('click' , function(){
-        const hValue = $('#sel').val();
-        let T = $('#horns-template').clone();
-        $('.container').empty();
-        $('.container').append(T);
-        pageAllJson.forEach(element => {
-          if (hValue ==='default'){
-            new Horns(element);
-          }
-
-          else if (element.keyword === hValue){
-            new Horns(element);
-          }
-        });
-      })
-
+      go(pageAllJson, hKeywordAll);
     }
 
   });
-
-
-  $('#pageSel').on('click',function(){
-    let result=$('#pageSel').val();
-    if (result === 'byName'){
-      page1Json.sort((a,b)=>{
-        if (a.title >b.title){
-          return 1;
-        }
-        if (b.title >a.title){
-          return -1;
-        }
-      })
-    }
-
-    else if (result === 'byHorns'){
-      page1Json.sort((a,b)=>{
-        if (a.horns >b.horns){
-          return 1;
-        }
-        if (b.horns >a.horns){
-          return -1;
-        }
-      });
-
-    }
-
-  });
-
-
-
-
-
 
 
 
 
 });
+
+function go (Page , hKeyword ){
+  let result=$('#pageSel').val();
+  if (result === 'byName'){
+    Page.sort((a,b)=>{
+      if (a.title >b.title){
+        return 1;
+      }
+      if (b.title >a.title){
+        return -1;
+      }
+    })
+  }
+
+  else if (result === 'byHorns'){
+    Page.sort((a,b)=>{
+      if (a.horns >b.horns){
+        return 1;
+      }
+      if (b.horns >a.horns){
+        return -1;
+      }
+    });
+
+  }
+
+
+  $('#sel').empty();
+  let T = $('#horns-template').clone();
+  $('.container').empty();
+  $('.container').append(T);
+  let selectOp1 =$('<option></option>').text('Filter by Keyword');
+  selectOp1.attr('value',`default`);
+  $('#sel').append(selectOp1);
+  hKeyword.forEach(element => {
+    const selectOp =$('<option></option>').text(element);
+    selectOp.attr('value',`${element}`);
+    $('#sel').append(selectOp);
+  });
+
+
+  Page.forEach(element => {
+    new Horns(element);
+  });
+
+  $('#sel').on('click' , function(){
+    const hValue = $('#sel').val();
+    let T = $('#horns-template').clone();
+    $('.container').empty();
+    $('.container').append(T);
+    Page.forEach(element => {
+      if (hValue ==='default'){
+        new Horns(element);
+      }
+
+      else if (element.keyword === hValue){
+        new Horns(element);
+      }
+    });
+  })
+
+}
+
+
+
+
+
+
+
+
+
+// $('#pageSel').on('click',function(){
+//   let result=$('#pageSel').val();
+//   if (result === 'byName'){
+//     page1Json.sort((a,b)=>{
+//       if (a.title >b.title){
+//         return 1;
+//       }
+//       if (b.title >a.title){
+//         return -1;
+//       }
+//     })
+//   }
+
+//   else if (result === 'byHorns'){
+//     page1Json.sort((a,b)=>{
+//       if (a.horns >b.horns){
+//         return 1;
+//       }
+//       if (b.horns >a.horns){
+//         return -1;
+//       }
+//     });
+
+//   }
+
+// });
