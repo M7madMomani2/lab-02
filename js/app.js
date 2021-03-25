@@ -54,15 +54,6 @@ $(document).ready(function(){
 
       });
 
-
-      page1Json.sort((a,b)=>{
-        if (a.title >b.title){
-          return 1;
-        }
-        if (b.title >a.title){
-          return -1;
-        }
-      })
       page1Json.forEach(element => {
         new Horns(element);
       });
@@ -82,15 +73,106 @@ $(document).ready(function(){
           }
         }
       });
-      pageAllJson.sort((a,b)=>{
-        if (a.title >b.title){
-          return 1;
-        }
-        if (b.title >a.title){
-          return -1;
-        }
-      })
     });
+
+
+
+
+  $('#sort').on('click' , function(){
+    const hValue = $('#sort').val();
+    const pValue = $('#pageSel').val();
+    if (hValue==='byName')
+    {
+
+      if (pValue === 'Page1'){
+        page1Json.sort((a,b)=>{
+          if (a.title >b.title){
+            return 1;
+          }
+          if (b.title >a.title){
+            return -1;
+          }
+        })
+        go(page1Json, hKeyword);
+      }
+
+      else if (pValue === 'Page2'){
+        page2Json.sort((a,b)=>{
+          if (a.title >b.title){
+            return 1;
+          }
+          if (b.title >a.title){
+            return -1;
+          }
+        })
+        go(page2Json, hKeyword);
+
+      }
+
+
+      else if (pValue === 'All'){
+        pageAllJson.sort((a,b)=>{
+          if (a.title >b.title){
+            return 1;
+          }
+          if (b.title >a.title){
+            return -1;
+          }
+        })
+        go(pageAllJson, hKeyword);
+      }
+
+    }
+
+    else if(hValue==='byHorns')
+    {
+
+      if (pValue === 'Page1'){
+        page1Json.sort((a,b)=>{
+          if (a.horns >b.horns){
+            return 1;
+          }
+          if (b.horns >a.horns){
+            return -1;
+          }
+        })
+        go(page1Json, hKeyword);
+      }
+
+      else if (pValue === 'Page2'){
+        page2Json.sort((a,b)=>{
+          if (a.horns >b.horns){
+            return 1;
+          }
+          if (b.horns >a.horns){
+            return -1;
+          }
+        })
+        go(page2Json, hKeyword);
+
+      }
+
+
+      else if (pValue === 'All'){
+        pageAllJson.sort((a,b)=>{
+          if (a.horns >b.horns){
+            return 1;
+          }
+          if (b.horns >a.horns){
+            return -1;
+          }
+        })
+        go(pageAllJson, hKeyword);
+      }
+
+    }
+  })
+
+
+
+
+
+
 
 
   $('#sel').on('click' , function(){
@@ -132,31 +214,6 @@ $(document).ready(function(){
 });
 
 function go (Page , hKeyword ){
-  let result=$('#pageSel').val();
-  if (result === 'byName'){
-    Page.sort((a,b)=>{
-      if (a.title >b.title){
-        return 1;
-      }
-      if (b.title >a.title){
-        return -1;
-      }
-    })
-  }
-
-  else if (result === 'byHorns'){
-    Page.sort((a,b)=>{
-      if (a.horns >b.horns){
-        return 1;
-      }
-      if (b.horns >a.horns){
-        return -1;
-      }
-    });
-
-  }
-
-
   $('#sel').empty();
   let T = $('#horns-template').clone();
   $('.container').empty();
@@ -192,38 +249,3 @@ function go (Page , hKeyword ){
   })
 
 }
-
-
-
-
-
-
-
-
-
-// $('#pageSel').on('click',function(){
-//   let result=$('#pageSel').val();
-//   if (result === 'byName'){
-//     page1Json.sort((a,b)=>{
-//       if (a.title >b.title){
-//         return 1;
-//       }
-//       if (b.title >a.title){
-//         return -1;
-//       }
-//     })
-//   }
-
-//   else if (result === 'byHorns'){
-//     page1Json.sort((a,b)=>{
-//       if (a.horns >b.horns){
-//         return 1;
-//       }
-//       if (b.horns >a.horns){
-//         return -1;
-//       }
-//     });
-
-//   }
-
-// });
